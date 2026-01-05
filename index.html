@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omkar Mane | Aspiring Full Stack Developer</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+   
+    <style>
+        :root {
+            --dark: #0f172a;
+            --dark-alt: #1e293b;
+            --light: #f8fafc;
+            --accent: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-solid: #667eea;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text);
+            background: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- NAVIGATION --- */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            padding: 1.2rem 2rem;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.4s;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: #667eea; }
+
+        /* --- HERO --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(102, 126, 234, 0.2)),
+                        url("https://images.unsplash.com/photo-1517134191118-9d595e4c8c2b?auto=format&fit=crop&q=80") center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 1rem;
+        }
+
+        .hero-card {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 3.5rem 2rem;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            max-width: 800px;
+            width: 100%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero-card h1 {
+            font-family: 'Montserrat';
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .typing { font-size: 1.3rem; color: #764ba2; font-weight: 600; min-height: 1.5em; }
+
+        .btn {
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0.5rem;
+            transition: 0.3s;
+        }
+
+        .primary { background: var(--accent); color: white; border: none; }
+        .outline { border: 2px solid var(--dark); color: var(--dark); background: transparent; }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+
+        /* --- ABOUT ME --- */
+        .section { padding: 80px 1.5rem; }
+        .container { max-width: 1100px; margin: auto; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; font-weight: 800; }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .image-wrapper {
+            position: relative;
+            background: white;
+            padding: 15px;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .image-wrapper img { 
+            width: 100%; 
+            border-radius: 20px; 
+            display: block; 
+            aspect-ratio: 4/5;
+            object-fit: cover;
+        }
+
+        .experience-badge {
+            position: absolute;
+            bottom: -15px;
+            right: -15px;
+            background: var(--accent);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .about-content h3 { font-size: 1.8rem; color: #475569; margin-bottom: 1rem; }
+        .description { color: var(--text-light); margin-bottom: 1.2rem; font-size: 1.05rem; }
+
+        .skills-bento { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1.5rem; }
+        .skill-tag {
+            padding: 8px 18px;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .skill-tag:hover { background: var(--accent-solid); color: white; border-color: transparent; }
+
+        /* --- EDUCATION --- */
+        .edu-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; max-width: 800px; margin: auto; }
+        .edu-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            border-left: 6px solid var(--accent-solid);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+        }
+        .edu-card:hover { transform: translateX(10px); }
+        .edu-info h4 { font-size: 1.3rem; color: var(--dark); }
+        .edu-year { font-weight: 700; color: var(--accent-solid); background: #f1f5f9; padding: 5px 15px; border-radius: 10px; }
+
+        /* --- EXPERIENCE --- */
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .card {
+            background: white;
+            padding: 3rem;
+            border-radius: 25px;
+            transition: 0.4s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            text-align: center;
+        }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+        .card i { font-size: 3rem; background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1.5rem; }
+
+        /* --- FOOTER --- */
+        .pro-footer { background: #0f172a; color: white; padding: 80px 1.5rem 30px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1.5fr; gap: 3rem; margin-bottom: 50px; }
+        .footer-socials { display: flex; gap: 1rem; margin-top: 1rem; }
+        .s-icon { width: 45px; height: 45px; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; border-radius: 12px; transition: 0.3s; color: white; }
+        .s-icon:hover { background: var(--accent); transform: translateY(-5px); }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 850px) {
+            .about-grid, .footer-grid { grid-template-columns: 1fr; }
+            .edu-card { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">OMKAR.</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#experience">Experience</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="home" class="hero">
+        <div class="hero-card">
+            <p style="text-transform: uppercase; letter-spacing: 2px; color: #64748b; font-weight: 600;">Hello, I am</p>
+            <h1>Omkar Mane</h1>
+            <p class="typing"><span id="typewriter"></span></p>
+            <div class="hero-actions">
+                <a href="resume.pdf" download class="btn primary"><i class="fas fa-file-download"></i> Download Resume</a>
+                <a href="mailto:maneomkar8907@gmail.com" class="btn outline">Get In Touch</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title reveal">About Me</h2>
+            <div class="about-grid">
+                <div class="reveal">
+                    <div class="image-wrapper">
+                        <img src="IMG_4395.JPG" alt="Omkar Mane">
+                        <div class="experience-badge">ASPIRING PRO</div>
+                    </div>
+                </div>
+                <div class="about-content reveal">
+                    <h3>Aspiring Full Stack Developer</h3>
+                    <p class="description">
+                        I am a dedicated <strong>MCA Graduate</strong> with a focus on building scalable web solutions. I have a strong foundation in the <strong>.NET ecosystem</strong> and modern frontend technologies.
+                    </p>
+                    <p class="description">
+                        My background as an <strong>L1 Support Engineer</strong> has equipped me with excellent problem-solving skills and a deep understanding of system reliability and troubleshooting.
+                    </p>
+                    <div class="skills-bento">
+                        <div class="skill-tag">ASP.NET Core</div>
+                        <div class="skill-tag">C#</div>
+                        <div class="skill-tag">SQL Server</div>
+                        <div class="skill-tag">JavaScript</div>
+                        <div class="skill-tag">WordPress</div>
+                        <div class="skill-tag">HTML/CSS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="section" style="background: #f8fafc;">
+        <div class="container">
+            <h2 class="section-title reveal">Education</h2>
+            <div class="edu-grid">
+                <div class="edu-card reveal">
+                    <div class="edu-info">
+                        <h4>Master of Computer Applications (MCA)</h4>
+                        <p>D Y Patil Agriculture & Technical University Talsande, Kolhapur</p>
+                    </div>
+                    <div class="edu-year">2023 - 2025</div>
+                </div>
+                <div class="edu-card reveal">
+                    <div class="edu-info">
+                        <h4>Bachelor of Computer Science (BCS)</h4>
+                        <p>Shivaji University, Kolhapur</p>
+                    </div>
+                    <div class="edu-year">2020 - 2023</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Experience</h2>
+            <div class="card-grid">
+                <div class="card reveal">
+                    <i class="fas fa-code"></i>
+                    <h3>Web Developer</h3>
+                    <p style="font-weight: 600; color: #764ba2;">Walstar Technologies</p>
+                    <p class="description">Worked on WordPress customization and responsive UI development.</p>
+                </div>
+                <div class="card reveal">
+                    <i class="fas fa-server"></i>
+                    <h3>L1 Support Engineer</h3>
+                    <p style="font-weight: 600; color: #764ba2;">Technical Support</p>
+                    <p class="description">Handled server maintenance, OS installations, and database troubleshooting.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="pro-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h2 class="logo">OMKAR.</h2>
+                    <p>Building the future of the web with clean code and creative design.</p>
+                    <div class="footer-socials">
+                        <a href="https://linkedin.com/in/omkar-s-mane" class="s-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/OmkarShrikantMane" class="s-icon"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Links</h4>
+                    <ul style="list-style: none;">
+                        <li><a href="#home" style="color:#94a3b8; text-decoration:none;">Home</a></li>
+                        <li><a href="#about" style="color:#94a3b8; text-decoration:none;">About</a></li>
+                        <li><a href="#education" style="color:#94a3b8; text-decoration:none;">Education</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p style="color: #94a3b8;">maneomkar8907@gmail.com</p>
+                    <p style="color: #94a3b8;">Maharashtra, India</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const words = ["Aspiring Full Stack Developer", ".NET Enthusiast", "MCA Graduate"];
+        let i = 0, j = 0, isDeleting = false;
+        function type() {
+            const current = words[i];
+            const display = isDeleting ? current.substring(0, j--) : current.substring(0, j++);
+            document.getElementById("typewriter").textContent = display;
+            if (!isDeleting && j === current.length + 1) { isDeleting = true; setTimeout(type, 2000); }
+            else if (isDeleting && j === 0) { isDeleting = false; i = (i + 1) % words.length; setTimeout(type, 500); }
+            else { setTimeout(type, isDeleting ? 50 : 100); }
+        }
+
+        function reveal() {
+            const reveals = document.querySelectorAll(".reveal");
+            reveals.forEach(el => {
+                const top = el.getBoundingClientRect().top;
+                if (top < window.innerHeight - 100) el.classList.add("active");
+            });
+        }
+
+        window.addEventListener("scroll", reveal);
+        document.addEventListener("DOMContentLoaded", () => { type(); reveal(); });
+    </script>
+</body>
+</html>
