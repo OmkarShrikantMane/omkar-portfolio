@@ -230,21 +230,122 @@
             .about-grid, .footer-grid { grid-template-columns: 1fr; }
             .edu-card { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
         }
+        /* --- MOBILE NAVBAR --- */
+.menu-toggle {
+    display: none;
+    font-size: 1.6rem;
+    color: white;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(15, 23, 42, 0.98);
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1.5rem 0;
+        display: none;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .hero {
+        padding-top: 120px;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .hero-card {
+        padding: 2.5rem 1.5rem;
+        border-radius: 20px;
+    }
+
+    .hero-card h1 {
+        font-size: 2.2rem;
+    }
+
+    .typing {
+        font-size: 1.1rem;
+    }
+}
+/* New Keyframes */
+@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+@keyframes icon-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+@keyframes bounceIn { 0% { transform: scale(0.3); opacity: 0; } 50% { transform: scale(1.05); } 70% { transform: scale(0.9); } 100% { transform: scale(1); opacity: 1; } }
+
+/* Enhanced Skill Tags - Pulse on load and hover shimmer */
+.skill-tag {
+    animation: pulse 2s infinite;
+    background: linear-gradient(90deg, #f0f9ff, #e0f2fe, #f0f9ff);
+    background-size: 200% 100%;
+    transition: all 0.4s ease;
+}
+.skill-tag:hover {
+    animation: shimmer 1.5s infinite linear;
+    background: linear-gradient(90deg, var(--accent-solid), #764ba2, var(--accent-solid));
+    color: white;
+    transform: translateY(-3px) rotate(5deg);
+}
+
+/* Cards - Bounce in on load, enhanced hover */
+.card, .edu-card {
+    animation: bounceIn 0.8s ease-out forwards;
+    opacity: 0;
+    animation-delay: 0.2s;
+}
+.card:hover i { animation: icon-spin 0.6s ease-in-out; }
+.card:hover { transform: translateY(-15px) scale(1.02); }
+
+/* Experience Badge Shimmer */
+.experience-badge {
+    animation: shimmer 2s infinite linear;
+    background: linear-gradient(90deg, var(--accent), #764ba2, var(--accent));
+    background-size: 200% 100%;
+}
+
+/* Parallax Hero Background */
+.hero {
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+@media (max-width: 768px) { .hero { background-attachment: scroll; } } /* Disable on mobile for perf */[web:14]
+
+
+
     </style>
 </head>
 <body>
 
     <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">OMKAR.</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#experience">Experience</a></li>
-            </ul>
+    <div class="nav-container">
+        <div class="logo">OMKAR.</div>
+
+        <div class="menu-toggle" id="menu-toggle">
+            <i class="fas fa-bars"></i>
         </div>
-    </nav>
+
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#experience">Experience</a></li>
+        </ul>
+    </div>
+</nav>
+
 
     <header id="home" class="hero">
         <div class="hero-card">
@@ -276,6 +377,9 @@
                     <p class="description">
                         My background as an <strong>L1 Support Engineer</strong> has equipped me with excellent problem-solving skills and a deep understanding of system reliability and troubleshooting.
                     </p>
+                    
+
+
                     <div class="skills-bento">
                         <div class="skill-tag">ASP.NET Core</div>
                         <div class="skill-tag">C#</div>
@@ -351,40 +455,65 @@
                     </ul>
                 </div>
                 <div class="footer-contact">
-                    <h4>Contact</h4>
-                    <p style="color: #94a3b8;">maneomkar8907@gmail.com</p>
-                    <p style="color: #94a3b8;">Maharashtra, India</p>
-                </div>
-            </div>
-        </div>
+    <h4>Contact</h4>
+    <p style="color: #94a3b8;">
+        <i class="fas fa-envelope"></i> maneomkar8907@gmail.com
+    </p>
+    <p style="color: #94a3b8;">
+        <i class="fas fa-phone"></i> +91 74987 42908
+    </p>
+    <p style="color: #94a3b8;">
+        <i class="fas fa-location-dot"></i> Maharashtra, India
+    </p>
+</div>
+
     </footer>
 
     <script>
-        const words = ["Aspiring Full Stack Developer", ".NET Enthusiast", "MCA Graduate"];
-        let i = 0, j = 0, isDeleting = false;
-        function type() {
-            const current = words[i];
-            const display = isDeleting ? current.substring(0, j--) : current.substring(0, j++);
-            document.getElementById("typewriter").textContent = display;
-            if (!isDeleting && j === current.length + 1) { isDeleting = true; setTimeout(type, 2000); }
-            else if (isDeleting && j === 0) { isDeleting = false; i = (i + 1) % words.length; setTimeout(type, 500); }
-            else { setTimeout(type, isDeleting ? 50 : 100); }
-        }
+        // Existing typewriter and reveal code...
+const words = ["Aspiring Full Stack Developer", ".NET Enthusiast", "MCA Graduate"];
+let i = 0, j = 0, isDeleting = false;
+function type() {
+    const current = words[i];
+    const display = isDeleting ? current.substring(0, j--) : current.substring(0, j++);
+    document.getElementById("typewriter").textContent = display;
+    if (!isDeleting && j === current.length + 1) { isDeleting = true; setTimeout(type, 2000); }
+    else if (isDeleting && j === 0) { isDeleting = false; i = (i + 1) % words.length; setTimeout(type, 500); }
+    else { setTimeout(type, isDeleting ? 50 : 100); }
+}
 
-        function reveal() {
-            const reveals = document.querySelectorAll(".reveal");
-            reveals.forEach(el => {
-                const top = el.getBoundingClientRect().top;
-                if (top < window.innerHeight - 100) el.classList.add("active");
-            });
+function reveal() {
+    const reveals = document.querySelectorAll(".reveal");
+    reveals.forEach((el, index) => {
+        const top = el.getBoundingClientRect().top;
+        if (top < window.innerHeight - 100) {
+            el.classList.add("active");
+            // Stagger cards/edu bounce-in
+            if (el.classList.contains('card') || el.classList.contains('edu-card')) {
+                el.style.animationDelay = `${index * 0.1}s`;
+            }
         }
+    });
+}
 
-        window.addEventListener("scroll", reveal);
-        document.addEventListener("DOMContentLoaded", () => { type(); reveal(); });
+// Smooth scrolling for nav links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+    });
+});
+
+// Existing mobile menu and init
+window.addEventListener("scroll", reveal);
+document.addEventListener("DOMContentLoaded", () => { type(); reveal(); });
+const toggle = document.getElementById("menu-toggle");
+const navLinks = document.getElementById("nav-links");
+toggle.addEventListener("click", () => { navLinks.classList.toggle("active"); });
+
     </script>
 </body>
 
 </html>
-
 
 
